@@ -52,17 +52,15 @@ State whether you believe there is a column in your dataset that is NMAR. Explai
 
 ### Missingness Dependency
 Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:
-• The distribution of column 
-Y
- when column 
-X
- is missing and the distribution of column 
-Y
- when column 
-X
- is not missing, as was done in Lecture 8.
+• The distribution of column Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8.
 • The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
 
+<iframe
+  src="assets/missingness-n_steps_reject_null.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ## Hypothesis Testing
 Clearly state your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
