@@ -32,6 +32,13 @@ Embed at least one plotly plot you created in your notebook that displays the di
 ### Bivariate Analysis
 Embed at least one plotly plot that displays the relationship between two columns. Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one bivariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
 
+<iframe
+  src="assets/bivariate-n_steps-boxplot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 
 ### Interesting Aggregates
 Embed at least one grouped table or pivot table in your website and explain its significance.
