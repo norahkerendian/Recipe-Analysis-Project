@@ -104,6 +104,13 @@ Embed at least one plotly plot that displays the relationship between two column
 ></iframe>
 
 <iframe
+  src="assets/bivariate-avg_rating-boxplot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+<iframe
   src="assets/bivariate-minutes-boxplot.html"
   width="800"
   height="600"
@@ -113,6 +120,51 @@ Embed at least one plotly plot that displays the relationship between two column
 
 ### Interesting Aggregates
 Embed at least one grouped table or pivot table in your website and explain its significance.
+
+| n_steps | avg_rating | n_ingredients | minutes |
+|--------:|------------:|--------------:|--------:|
+|       1 |        4.72 |          5.73 |   22.20 |
+|       2 |        4.72 |          5.96 |   38.42 |
+|       3 |        4.71 |          6.53 |   46.47 |
+|       4 |        4.70 |          7.07 |   72.68 |
+|       5 |        4.66 |          7.53 |   94.82 |
+|     ... |         ... |           ... |     ... |
+|      87 |        5.00 |          9.00 |  195.00 |
+|      88 |        4.20 |          9.50 | 2610.00 |
+|      93 |        5.00 |         13.00 |  360.00 |
+|      98 |        5.00 |         18.00 | 2930.00 |
+|     100 |        5.00 |         19.00 | 1680.00 |
+
+<iframe
+  src="assets/interesting-aggregate-n_steps-lineplot
+.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Click on the legend to see each individual line clearly.
+
+<iframe
+  src="assets/interesting-aggregate-n_steps-avg_rating-lineplot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+| n_steps | Mean | Median | Max  | Min  |
+|--------:|-----:|-------:|-----:|-----:|
+|       1 | 4.72 |   5.00 | 5.00 | 1.00 |
+|       2 | 4.72 |   4.92 | 5.00 | 1.00 |
+|       3 | 4.71 |   4.90 | 5.00 | 1.00 |
+|       4 | 4.70 |   4.88 | 5.00 | 1.00 |
+|       5 | 4.66 |   4.83 | 5.00 | 1.00 |
+|     ... |  ... |    ... |  ... |  ... |
+|      87 | 5.00 |   5.00 | 5.00 | 5.00 |
+|      88 | 4.20 |   4.33 | 4.33 | 3.00 |
+|      93 | 5.00 |   5.00 | 5.00 | 5.00 |
+|      98 | 5.00 |   5.00 | 5.00 | 5.00 |
+|     100 | 5.00 |   5.00 | 5.00 | 5.00 |
 
 
 ## Assessment of Missingness
