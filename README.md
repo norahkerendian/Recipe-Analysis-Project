@@ -143,14 +143,6 @@ Embed at least one grouped table or pivot table in your website and explain its 
   frameborder="0"
 ></iframe>
 
-Click on the legend to see each individual line clearly.
-
-<iframe
-  src="assets/interesting-aggregate-n_steps-avg_rating-lineplot.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
 
 | n_steps | Mean | Median | Max  | Min  |
 |--------:|-----:|-------:|-----:|-----:|
@@ -165,6 +157,16 @@ Click on the legend to see each individual line clearly.
 |      93 | 5.00 |   5.00 | 5.00 | 5.00 |
 |      98 | 5.00 |   5.00 | 5.00 | 5.00 |
 |     100 | 5.00 |   5.00 | 5.00 | 5.00 |
+
+<iframe
+  src="assets/interesting-aggregate-n_steps-avg_rating-lineplot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+
+Click on the legend to see each individual line clearly.
 
 
 ## Assessment of Missingness
