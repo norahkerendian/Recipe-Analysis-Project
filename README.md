@@ -42,8 +42,16 @@ Now, without further ado, let’s dive into the analysis.
 ### Data Cleaning
 Describe, in detail, the data cleaning steps you took and how they affected your analyses. The steps should be explained in reference to the data generating process. Show the head of your cleaned DataFrame (see Part 2: Report for instructions).
 
-Only selected to display the columns that are relevant to the analysis
+The data cleaning process began by merging the two datasets and then proceeding with the necessary steps to prepare the data for analysis. The steps taken are as follows:
 
+1. **Merging the Datasets**: The recipes and interactions datasets were left-merged on the `id` and `recipe_id` columns.
+2. **Handling Missing Ratings**: In the merged dataset, all ratings of 0 were replaced with `np.nan`. Since the rating scale ranges from 1 to 5, a rating of 0 indicates missing data. This replacement is crucial to avoid bias in the analysis.
+3. **Calculating Average Ratings**: A new column, `avg_rating`, was created to store the average rating for each unique recipe. This step ensures a comprehensive understanding of the ratings, as some recipes have multiple ratings.
+4. **Converting List Columns**: Some columns, such as `nutrition`, were stored as strings, making list operations impossible. These columns were converted into lists for easier manipulation. 
+5. **Breaking Down the `nutrition` Column**: The `nutrition` column, which contains multiple values, was split into individual columns for each nutritional component (e.g., `calories`, `protein`, `sugar`). This allows for more detailed analysis of the nutritional data.
+6. **Converting Date Columns**: The `submitted` and `date` columns, which contain date information, were originally stored as strings. These were converted to datetime objects, enabling accurate analysis of temporal data.
+
+After these data cleaning steps, the dataset now contains 234,429 rows and 28 columns. Below is the head of the cleaned DataFrame, with only the columns relevant to the analysis:
 
 | name                                 |     id |   minutes | submitted           | tags_list                                                                                                                                                                                                                   |   n_steps |   n_ingredients |   avg_rating |   calories |   protein |
 |:-------------------------------------|-------:|----------:|:--------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------:|----------------:|-------------:|-----------:|----------:|
@@ -52,6 +60,22 @@ Only selected to display the columns that are relevant to the analysis
 | 412 broccoli casserole               | 306168 |        40 | 2008-05-30 00:00:00 | ['60-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'side-dishes', 'vegetables', 'easy', 'beginner-cook', 'broccoli']                                                                        |         6 |               9 |            5 |      194.8 |        22 |
 | 412 broccoli casserole               | 306168 |        40 | 2008-05-30 00:00:00 | ['60-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'side-dishes', 'vegetables', 'easy', 'beginner-cook', 'broccoli']                                                                        |         6 |               9 |            5 |      194.8 |        22 |
 | 412 broccoli casserole               | 306168 |        40 | 2008-05-30 00:00:00 | ['60-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'side-dishes', 'vegetables', 'easy', 'beginner-cook', 'broccoli']                                                                        |         6 |               9 |            5 |      194.8 |        22 |
+
+For additional context, the table below outlines the data types for each column displayed above:
+
+| Column        | Type                                     |
+|:--------------|:-----------------------------------------|
+| name          | nominal categorical                      |
+| id            | nominal categorical                      |
+| minutes       | numerical discrete                       |
+| submitted     | numerical discrete                       |
+| tags          | nominal categorical                      |
+| n_steps       | numerical discrete                       |
+| n_ingredients | numerical discrete                       |
+| avg_rating    | numerical continuous/ordinal categorical |
+| calories      | numerical continuous                     |
+| protein       | numerical continuous                     |
+
 
 ### Univariate Analysis
 Embed at least one plotly plot you created in your notebook that displays the distribution of a single column (see Part 2: Report for instructions). Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one univariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
