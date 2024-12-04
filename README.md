@@ -103,6 +103,13 @@ Embed at least one plotly plot that displays the relationship between two column
   frameborder="0"
 ></iframe>
 
+<iframe
+  src="assets/bivariate-minutes-boxplot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 
 ### Interesting Aggregates
 Embed at least one grouped table or pivot table in your website and explain its significance.
