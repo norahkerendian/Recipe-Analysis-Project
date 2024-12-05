@@ -77,7 +77,8 @@ For additional context, the table below outlines the data types for each column 
 
 
 ### Univariate Analysis
-Embed at least one plotly plot you created in your notebook that displays the distribution of a single column (see Part 2: Report for instructions). Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one univariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
+
+The plot below visualizes the distribution of `n_steps` in the recipes, providing insight into the typical number of steps involved. We can see that the distribution is heavily right-skewed. The median number of steps appears to be close to 7, which suggests that most recipes are relatively simple, with a smaller spread towards recipes with more complexity/steps.
 
 <iframe
   src="assets/univariate-n_steps-distribution.html"
@@ -86,12 +87,17 @@ Embed at least one plotly plot you created in your notebook that displays the di
   frameborder="0"
 ></iframe>
 
+Now, if we visualize the distribution of avg_rating we can gain valuable insight into the overall rating trends. The graphs displays a pronounced left skew, with most average ratings clustering around 5. This tells us that the majority of recipes in the dataset are highly rated (on average). Additionally, we can see that a significant portion of the data is concentrated near the upper end of the x-axis, with average ratings between 4 and 5. This further reinforces the dataset’s overall favorable ratings.
+
 <iframe
   src="assets/univariate-avg_rating-distribution.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+
+With these two plots, we are starting to address the main question posed in the introduction. The distribution of `n_steps` suggests that simplicity is common in the recipes, while the distribution of `avg_rating` shows that these simpler recipes tend to receive high ratings. Together, these insights could imply that complexity may not be the primary driver of high ratings. People might appreciate and rate recipes higher that are more accessible and straightforward. This can hint that the fact the recipes with fewer steps can perform just as weel, if not better, than more complex recipes. 
+
 
 ### Bivariate Analysis
 Embed at least one plotly plot that displays the relationship between two columns. Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one bivariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
