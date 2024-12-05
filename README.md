@@ -96,11 +96,12 @@ Now, if we visualize the distribution of avg_rating we can gain valuable insight
   frameborder="0"
 ></iframe>
 
-With these two plots, we are starting to address the main question posed in the introduction. The distribution of `n_steps` suggests that simplicity is common in the recipes, while the distribution of `avg_rating` shows that these simpler recipes tend to receive high ratings. Together, these insights could imply that complexity may not be the primary driver of high ratings. People might appreciate and rate recipes higher that are more accessible and straightforward. This can hint that the fact the recipes with fewer steps can perform just as weel, if not better, than more complex recipes. 
+With these two plots, we are starting to address the main question posed in the introduction. The distribution of `n_steps` suggests that simplicity is common in the recipes, while the distribution of `avg_rating` shows that these simpler recipes tend to receive high ratings. Together, these insights could imply that complexity may not be the primary driver of high ratings. People might appreciate and rate recipes higher that are more accessible and straightforward. This can hint that the fact the recipes with fewer steps can perform just as well, if not better, than more complex recipes. 
 
 
 ### Bivariate Analysis
-Embed at least one plotly plot that displays the relationship between two columns. Include a 1-2 sentence explanation about your plot, making sure to describe and interpret any trends present. (Your notebook will likely have more visualizations than your website, and that’s fine. Feel free to embed more than one bivariate visualization in your website if you’d like, but make sure that each embedded plot is accompanied by a description.)
+
+To futher explore the relationship between `n_steps` and `avg_rating`, they are plotted together. In order to create this plot, the recipes were grouped into bins based on the `n_steps`. The plot shows us that most recipes, regardless of the number of steps, seems to have high average ratings. This supports our univariate analysis findings. We can see this by looking at the interquartile ranges (IQR) of each group. Interestingly, recipes with a higher number of steps do not show a significant drop in their average ratings, suggesting that the number of steps may not strongly affect the overall rating. 
 
 <iframe
   src="assets/bivariate-n_steps-boxplot.html"
@@ -109,13 +110,7 @@ Embed at least one plotly plot that displays the relationship between two column
   frameborder="0"
 ></iframe>
 
-<iframe
-  src="assets/bivariate-avg_rating-boxplot.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
-
+Next, let's look at another relationship, this time between the average rating of a recipe and the time it takes to make (`minutes`). A similar analysis was performed but here recipes were grouped by `minutes`. This plot shows that most recipes regardless of the `minutes` also seem to have high average ratings. This makes sense due to the large clustering we saw in our univariate analysis. However, when we look at the IQR for each group, we see the median graduadlly decreasing as the time increases. This suggests that recipes with higher cooking time might receive lower ratings. 
 <iframe
   src="assets/bivariate-minutes-boxplot.html"
   width="800"
@@ -123,9 +118,14 @@ Embed at least one plotly plot that displays the relationship between two column
   frameborder="0"
 ></iframe>
 
+With this bivariate analysis, we can futher answer our main question.
+
 
 ### Interesting Aggregates
 Embed at least one grouped table or pivot table in your website and explain its significance.
+
+Here, we can further examine the relationship between `n_steps` and key recipe characteristics, such as `avg_rating`, `n_ingredients`, and `minutes`. The table and plot below summarizes the mean `avg_rating`, `n_ingredients`, and `minutes` for each `n_steps` group. We can see how the variables change as the complexity of the recipe increases. If we zoom in on the `n_ingredients` column we can see that there is an increase in the avgerage number of ingreidents as the number of steps increase. We also see this pattern in the `minutes` column. However, if we look at the avg_rating column, it is a bit diffult to make the same conclusion as we see a lot more fluctuation in both the table and the plot as the number of steps increases.
+
 
 | n_steps | avg_rating | n_ingredients | minutes |
 |--------:|------------:|--------------:|--------:|
@@ -149,6 +149,7 @@ Embed at least one grouped table or pivot table in your website and explain its 
   frameborder="0"
 ></iframe>
 
+To look at the fluction examined above even deeper, we can look at the mean, median, maximum, and minimum values for each grouping. This highlights the variability within each group. We can observe in the plot that while the majority of recipes maintain high ratings, there are some lower ratings in more complex recipes (e.g., `n_steps`: 88), which gives us some insight into the ratings of recipes.
 
 | n_steps | Mean | Median | Max  | Min  |
 |--------:|-----:|-------:|-----:|-----:|
@@ -171,9 +172,7 @@ Embed at least one grouped table or pivot table in your website and explain its 
   frameborder="0"
 ></iframe>
 
-
-Click on the legend to see each individual line clearly.
-
+For the line plots above, feel free to interact (double click) with the legend to view each line clearly.
 
 ## Assessment of Missingness
 
