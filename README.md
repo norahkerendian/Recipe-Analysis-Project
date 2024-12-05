@@ -173,28 +173,23 @@ For the line plots above, feel free to interact (double click) with the legend t
 ## Assessment of Missingness
 
 ### NMAR Analysis
-State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
 
-review column is NMAR because people can choose not to leave a review. they most likely only leave a review when they have extreme emotions. description column is also NMAR because the author can choose not to leave a description if they feel like it does not need one. but it could be MAR if it might have to do based on the n_steps? but i will go with nmar because i want to focus my mar calcluations on the rating column
+Looking at the dataset, there are three columns that have missing values: `description`, `rating` (and `avg_rating`), and `review`. Due to this, it will be meaningful to assess the missingness of the columns. Looking at the missing columns, there is reason to believe that the column `review` is considered Missing Not At Random (NMAR). The `review` column contains written reviews for recipes which could be missing due to various factors, one being an emotional one. For example, someone may only leave a review if the recipe was either a disaster or exceptional, while moderate experiences might be underrepresented. For instance, a failed recipe might prompt a negative review due to frustration, whereas a successful but unremarkable experience may result in no review at all. An additional piece of data that could change the classification of missingness from NMAR to MAR (Missing At Random), is if we had a column that indicated if the recipe succeeded, failed, or had moderate results. This added variable could help predict which reviews could be missing depending of the success rate of the attmepted recipe. 
 
-Looking at the dataset, there are three columns that have missing values: `description`, `rating` (and `avg_rating`), and `review`. Due to this, it will be meaningful to assess the missingness of the columns. Looking at the missing columns, there is reason to believe that the column `review` is considered Missing Not At Random (NMAR). The `review` column contains written reviews for recipes which could be missing due to various factors, one being an emotional one. For example, if an individual tried recreating a recipe and their final product was absolutely terrible, they will most likely be upset that the recipe "led" them to failure. This could cause them to leave a nasty review with a low rating. But, if an individual recreates a recipe and is satisfied with their outcome, they might feel no need to leave a written review because they were content and might not have the time to write about the reason behind their possible rating. This could lead to a missing review. An additional piece of data that could change the missingness of this column from NMAR to MAR (Missing At Random), is if we had a column that indicated if the recipe failed, succeeded, or was moderate. This could help us possible predict which reviews could be missing depending of the success rate of the attmepted recipe. 
 
 ### Missingness Dependency
-Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:
-• The distribution of column Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8.
-• The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
 
 Now, let's assess the missingness of the `rating` column to determine if it is dependent on another column. 
 
 > Rating and Number of Steps
 
-To start, there is reason to believe that ratings might be missing depending on the number of steps in a recipe. There can be some intuition that if a recipe has a moderate number of steps and is fairly straight forward, then people might not leave a review because it was something that they just used and that's it. In order to determine if missing ratings is dependent on the number of steps, a permutation test can be performed. 
+To start, there is reason to believe that ratings might be missing depending on the number of steps in a recipe. Intuitively, if a recipe has a moderate number of steps and is fairly straightforward, then people might not leave a review because the recipe met expectations without eliciting a strong reaction. To determine if missing ratings is dependent on the number of steps, a permutation test can be performed. 
 
 **Null Hypothesis**: The missingness of the `rating` column does not depend on the number of steps (`n_steps`) in the recipe.
 
 **Alternative Hypothesis**: The missingness of the `rating` column does depend on the number of steps (`n_steps`) in the recipe.
 
-**Test Statistic**: Absolute Difference in Means 
+**Test Statistic**: Absolute Difference in Means and Kolmogorov-Smirnov (two separate tests)
 
 **Significance Level**: 0.05
 
@@ -212,11 +207,11 @@ To start, there is reason to believe that ratings might be missing depending on 
   frameborder="0"
 ></iframe>
 
-both ks and abs diff in means gave me a p-val of < 0.05, thus i reject the null. missingness of ratings depends on n_steps
+Both the Kolmogorov-Smirnov (KS) test and the Absolute Difference in Means test yielded p-values of **0.0** which is less than the stated significance level of 0.05. Thus, I reject the null hypothesis which concludes that the missingness of the rating column does depend on the number of steps.
 
 > Rating and Minutes
 
-Now the question arises: Is there a column that the `rating` column is not dependent on? To answer this question, let's run another perumation test. 
+Now the question arises: Is there a column that the `rating` column is not dependent on? To answer this question, let's run another perumation test. This permutation test asks whether the rating column's missingness depends on the minutes column.
 
 **Null Hypothesis**: The missingness of the `rating` column does not depend on the number of minutes (`minutes`) in the recipe.
 
@@ -233,8 +228,7 @@ Now the question arises: Is there a column that the `rating` column is not depen
   frameborder="0"
 ></iframe>
 
-abs diff in means gave me a p-val = 0.125 > 0.05, thus i fail to reject the null. missingness of ratings does not depend on minutes
-
+The Absolute Difference in Means test produced a p-value of **0.125**, which is greater than the significance level of 0.05. Thus, I fail to reject the null hypothesis, which suggests that that the missingness of the rating column does not depend on the number of minutes in the recipe.
 
 ## Hypothesis Testing
 Clearly state your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
