@@ -175,11 +175,22 @@ For the line plots above, feel free to interact (double click) with the legend t
 ### NMAR Analysis
 State whether you believe there is a column in your dataset that is NMAR. Explain your reasoning and any additional data you might want to obtain that could explain the missingness (thereby making it MAR). Make sure to explicitly use the term “NMAR.”
 
+review column is NMAR because people can choose not to leave a review. they most likely only leave a review when they have extreme emotions. description column is also NMAR because the author can choose not to leave a description if they feel like it does not need one. but it could be MAR if it might have to do based on the n_steps? but i will go with nmar because i want to focus my mar calcluations on the rating column
+
+Looking at the dataset, there are three columns that have missing values: `description`, `rating` (and `avg_rating`), and `review`. Due to this, it will be meaningful to assess the missingness of the columns. Looking at the missing columns, there is reason to believe that the column `review` is considered Missing Not At Random (NMAR). The `review` column contains written reviews for recipes which could be missing due to various factors, one being an emotional one. For example, if an individual tried recreating a recipe and their final product was absolutely terrible, they will most likely be upset that the recipe "led" them to failure. This could cause them to leave a nasty review with a low rating. But, if an individual recreates a recipe and is satisfied with their outcome, they might feel no need to leave a written review because they were content and might not have the time to write about the reason behind their possible rating. This could lead to a missing review. An additional piece of data that could change the missingness of this column from NMAR to MAR (Missing At Random), is if we had a column that indicated if the recipe failed, succeeded, or was moderate. This could help us possible predict which reviews could be missing depending of the success rate of the attmepted recipe. 
 
 ### Missingness Dependency
 Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:
 • The distribution of column Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8.
 • The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
+
+**Null Hypothesis**: The missingness of the `rating` column does not depend on the number of steps (`n_steps`) in the recipe.
+
+**Alternative Hypothesis**: The missingness of the `rating` column does depend on the number of steps (`n_steps`) in the recipe.
+
+**Test Statistic**: Absolute Difference in Means
+
+**Significance Level**: 0.05
 
 <iframe
   src="assets/missingness-n_steps_reject_null.html"
@@ -187,6 +198,33 @@ Present and interpret the results of your missingness permutation tests with res
   height="600"
   frameborder="0"
 ></iframe>
+
+<iframe
+  src="assets/missingness-n_steps-kde_map-reject-null.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+both ks and abs diff in means gave me a p-val of < 0.05, thus i reject the null. missingness of ratings depends on n_steps
+
+**Null Hypothesis**: The missingness of the `rating` column does not depend on the number of minutes (`minutes`) in the recipe.
+
+**Alternative Hypothesis**: The missingness of the `rating` column does depend on the number of minutes (`minutes`) in the recipe.
+
+**Test Statistic**: Absolute Difference in Means
+
+**Significance Level**: 0.05
+
+<iframe
+  src="assets/missingness-n_steps_fail-to-reject-null.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+abs diff in means gave me a p-val = 0.125 > 0.05, thus i fail to reject the null. missingness of ratings does not depend on minutes
+
 
 ## Hypothesis Testing
 Clearly state your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
