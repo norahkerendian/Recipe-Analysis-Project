@@ -86,7 +86,6 @@ The plot below visualizes the distribution of `n_steps` in the recipes, providin
   height="600"
   frameborder="0"
 ></iframe>
-
 Now, if we visualize the distribution of avg_rating we can gain valuable insight into the overall rating trends. The graphs displays a pronounced left skew, with most average ratings clustering around 5. This tells us that the majority of recipes in the dataset are highly rated (on average). Additionally, we can see that a significant portion of the data is concentrated near the upper end of the x-axis, with average ratings between 4 and 5. This further reinforces the dataset’s overall favorable ratings.
 
 <iframe
@@ -95,7 +94,6 @@ Now, if we visualize the distribution of avg_rating we can gain valuable insight
   height="600"
   frameborder="0"
 ></iframe>
-
 With these two plots, we are starting to address the main question posed in the introduction. The distribution of `n_steps` suggests that simplicity is common in the recipes, while the distribution of `avg_rating` shows that these simpler recipes tend to receive high ratings. Together, these insights could imply that complexity may not be the primary driver of high ratings. People might appreciate and rate recipes higher that are more accessible and straightforward. This can hint that the fact the recipes with fewer steps can perform just as well, if not better, than more complex recipes. 
 
 
@@ -109,7 +107,6 @@ To futher explore the relationship between `n_steps` and `avg_rating`, they are 
   height="600"
   frameborder="0"
 ></iframe>
-
 Next, let's look at another relationship, this time between the average rating of a recipe and the time it takes to make (`minutes`). A similar analysis was performed but here recipes were grouped by `minutes`. This plot shows that most recipes regardless of the `minutes` also seem to have high average ratings. This makes sense due to the large clustering we saw in our univariate analysis. However, when we look at the IQR for each group, we see the median graduadlly decreasing as the time increases. This suggests that recipes with higher cooking time might receive lower ratings. 
 <iframe
   src="assets/bivariate-minutes-boxplot.html"
@@ -117,7 +114,6 @@ Next, let's look at another relationship, this time between the average rating o
   height="600"
   frameborder="0"
 ></iframe>
-
 With this bivariate analysis, we can futher answer our main question.
 
 
@@ -141,6 +137,7 @@ Here, we can further examine the relationship between `n_steps` and key recipe c
 |      98 |        5.00 |         18.00 | 2930.00 |
 |     100 |        5.00 |         19.00 | 1680.00 |
 
+
 <iframe
   src="assets/interesting-aggregate-n_steps-lineplot
 .html"
@@ -148,7 +145,6 @@ Here, we can further examine the relationship between `n_steps` and key recipe c
   height="600"
   frameborder="0"
 ></iframe>
-
 To look at the fluction examined above even deeper, we can look at the mean, median, maximum, and minimum values for each grouping. This highlights the variability within each group. We can observe in the plot that while the majority of recipes maintain high ratings, there are some lower ratings in more complex recipes (e.g., `n_steps`: 88), which gives us some insight into the ratings of recipes.
 
 | n_steps | Mean | Median | Max  | Min  |
@@ -165,13 +161,13 @@ To look at the fluction examined above even deeper, we can look at the mean, med
 |      98 | 5.00 |   5.00 | 5.00 | 5.00 |
 |     100 | 5.00 |   5.00 | 5.00 | 5.00 |
 
+
 <iframe
   src="assets/interesting-aggregate-n_steps-avg_rating-lineplot.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-
 For the line plots above, feel free to interact (double click) with the legend to view each line clearly.
 
 ## Assessment of Missingness
