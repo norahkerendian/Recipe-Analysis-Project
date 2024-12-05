@@ -82,8 +82,8 @@ The plot below visualizes the distribution of `n_steps` in the recipes, providin
 
 <iframe
   src="assets/univariate-n_steps-distribution.html"
-  width="400"
-  height="200"
+  width="600"
+  height="400"
   frameborder="0"
 ></iframe>
 Now, if we visualize the distribution of avg_rating we can gain valuable insight into the overall rating trends. The graphs displays a pronounced left skew, with most average ratings clustering around 5. This tells us that the majority of recipes in the dataset are highly rated (on average). Additionally, we can see that a significant portion of the data is concentrated near the upper end of the x-axis, with average ratings between 4 and 5. This further reinforces the dataset’s overall favorable ratings.
