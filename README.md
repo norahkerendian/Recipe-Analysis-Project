@@ -184,11 +184,17 @@ Present and interpret the results of your missingness permutation tests with res
 • The distribution of column Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8.
 • The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
 
+Now, let's assess the missingness of the `rating` column to determine if it is dependent on another column. 
+
+> Rating and Number of Steps
+
+To start, there is reason to believe that ratings might be missing depending on the number of steps in a recipe. There can be some intuition that if a recipe has a moderate number of steps and is fairly straight forward, then people might not leave a review because it was something that they just used and that's it. In order to determine if missing ratings is dependent on the number of steps, a permutation test can be performed. 
+
 **Null Hypothesis**: The missingness of the `rating` column does not depend on the number of steps (`n_steps`) in the recipe.
 
 **Alternative Hypothesis**: The missingness of the `rating` column does depend on the number of steps (`n_steps`) in the recipe.
 
-**Test Statistic**: Absolute Difference in Means
+**Test Statistic**: Absolute Difference in Means 
 
 **Significance Level**: 0.05
 
@@ -207,6 +213,10 @@ Present and interpret the results of your missingness permutation tests with res
 ></iframe>
 
 both ks and abs diff in means gave me a p-val of < 0.05, thus i reject the null. missingness of ratings depends on n_steps
+
+> Rating and Minutes
+
+Now the question arises: Is there a column that the `rating` column is not dependent on? To answer this question, let's run another perumation test. 
 
 **Null Hypothesis**: The missingness of the `rating` column does not depend on the number of minutes (`minutes`) in the recipe.
 
