@@ -249,6 +249,22 @@ Optional: Embed a visualization related to your hypothesis test in your website.
 
 Tip: When making writing your conclusions to the statistical tests in this project, never use language that implies an absolute conclusion; since we are performing statistical tests and not randomized controlled trials, we cannot prove that either hypothesis is 100% true or false.
 
+**Null Hypothesis**: The number of steps in a recipe does not affect the recipe's average rating.
+
+**Alternative Hypothesis**: Recipes with more steps are rated lower on average.
+
+**Test Statistic**: Difference in Means between between two groups: recipes with `n_steps` less than or equal to the median number of steps and recipes with `n_steps` greater than the median number of steps
+
+**Significance Level**: 0.05
+
+<iframe
+  src="assets/hypothesis-testing-n_steps.html"
+  width="600"
+  height="450"
+  frameborder="0"
+></iframe>
+
+This hypothesis test produced a p-value of **0.045**, which is less than the significance level of 0.05. Thus, I reject the null hypothesis, which suggests that there is sufficient evidence to support the alternative hypothesis that recipes with more steps are rated lower on average.
 
 ## Framing a Prediction Problem
 Clearly state your prediction problem and type (classification or regression). If you are building a classifier, make sure to state whether you are performing binary classification or multiclass classification. Report the response variable (i.e. the variable you are predicting) and why you chose it, the metric you are using to evaluate your model and why you chose it over other suitable metrics (e.g. accuracy vs. F1-score).
