@@ -241,19 +241,18 @@ Now the question arises: Is there a column that the `rating` column is not depen
 The Absolute Difference in Means test produced a p-value of **0.125**, which is greater than the significance level of 0.05. Thus, I fail to reject the null hypothesis, which suggests that that the missingness of the rating column does not depend on the number of minutes in the recipe.
 
 ## Hypothesis Testing
-Clearly state your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
-p
--value, and your conclusion. Justify why these choices are good choices for answering the question you are trying to answer.
 
-Optional: Embed a visualization related to your hypothesis test in your website.
+To further explore the main question-*Does the complexity of a recipe—measured by the number of steps or ingredients—affect how it is rated by others?*-it would be worth while to see the relationship between the number of steps and the rating. To investigate this, it will be useful to run a permutation test. A permutation test is prefered over a standard hypothesis test because the main goal is to determine whether the two groups-recipes with `n_steps` less than or equal to the median number of steps and recipes with `n_steps` greater than the median number of steps-look like they come from the same population. 
 
-Tip: When making writing your conclusions to the statistical tests in this project, never use language that implies an absolute conclusion; since we are performing statistical tests and not randomized controlled trials, we cannot prove that either hypothesis is 100% true or false.
+There is reason to hypothesize that recipes with more steps are rated lower on average. This could be due to their complexity intimidating or frustrating users, leading to lower ratings, or because such recipes are prone to execution errors, resulting in unsatisfactory outcomes. To test this, the test statistic of difference of means between the two groups was calculated. This is appropriate because the alternative hypothesis has a certain direction posits a specific direction: that recipes with more steps tend to receive lower ratings.
+
+To investigate this, the following was conducted:
 
 **Null Hypothesis**: The number of steps in a recipe does not affect the recipe's average rating.
 
 **Alternative Hypothesis**: Recipes with more steps are rated lower on average.
 
-**Test Statistic**: Difference in Means between between two groups: recipes with `n_steps` less than or equal to the median number of steps and recipes with `n_steps` greater than the median number of steps
+**Test Statistic**: Difference in Means between two groups: recipes with `n_steps` less than or equal to the median and recipes with `n_steps` greater than the median.
 
 **Significance Level**: 0.05
 
@@ -264,7 +263,7 @@ Tip: When making writing your conclusions to the statistical tests in this proje
   frameborder="0"
 ></iframe>
 
-This hypothesis test produced a p-value of **0.045**, which is less than the significance level of 0.05. Thus, I reject the null hypothesis, which suggests that there is sufficient evidence to support the alternative hypothesis that recipes with more steps are rated lower on average.
+The permutation test produced a p-value of **0.045**, which is less than the significance level of 0.05. Thus, I reject the null hypothesis, which suggests that there is sufficient evidence to support the alternative hypothesis: recipes with more steps are rated lower on average. This adds some insight to the relationship between the number of steps of a recipe and it's rating. 
 
 ## Framing a Prediction Problem
 Clearly state your prediction problem and type (classification or regression). If you are building a classifier, make sure to state whether you are performing binary classification or multiclass classification. Report the response variable (i.e. the variable you are predicting) and why you chose it, the metric you are using to evaluate your model and why you chose it over other suitable metrics (e.g. accuracy vs. F1-score).
