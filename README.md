@@ -3,7 +3,7 @@
 Author: Norah Kerendian
 
 ## Introduction
-As an undergraduate student with a packed schedule, cooking is both a creative outlet, a balancing act, and an opportunity to not have dining hall meals. When I cook, time is often of the essence, and the number of steps in a recipe can determine whether a meal is quick and satisfying or a time-consuming challenge. With this in mind, this report delves into how the complexity and duration of recipes might influence ratings of recipes, particularly for those who, like me, juggle academics, commitments, and the desire for homemade meals. In order to conduct this analysis, two datasets of recipes and ratings posted to [food.com](https://www.food.com/) since 2008 were used. The datasets were originally scraped and used by the authors of the paper, [Generating Personalized Recipes from Historical User Preferences](https://cseweb.ucsd.edu/~jmcauley/pdfs/emnlp19c.pdf). 
+As an undergraduate student with a packed schedule, cooking is both a creative outlet, a balancing act, and an opportunity to not have dining hall meals. When I cook, time is often of the essence, and the number of steps in a recipe can determine whether a meal is quick and satisfying or a time-consuming challenge. With this in mind, this report delves into how the complexity and duration of recipes might influence ratings of recipes, particularly for those who, like me, juggle academics, commitments, and the desire for homemade meals. In order to conduct this analysis, two datasets of recipes and ratings were posted to [food.com](https://www.food.com/) since 2008 were used. The datasets were originally scraped and used by the authors of the paper, [Generating Personalized Recipes from Historical User Preferences](https://cseweb.ucsd.edu/~jmcauley/pdfs/emnlp19c.pdf). 
 
 
 The `recipes` dataset consisted of 83,782 rows of unique recipes and 12 columns. The columns and their descriptions are below:
@@ -54,7 +54,7 @@ The data cleaning process began by merging the two datasets and then proceeding 
 5. **Breaking Down the `nutrition` Column**: The `nutrition` column, which contains multiple values, was split into individual columns for each nutritional component (e.g., `calories`, `protein`, `sugar`). This allows for more detailed analysis of the nutritional data.
 6. **Converting Date Columns**: The `submitted` and `date` columns, which contain date information, were originally stored as strings. These were converted to datetime objects, enabling accurate analysis of temporal data.
 
-After these data cleaning steps, the dataset now contains 234,429 rows and 28 columns. Below is the first 5 unique recipes of the cleaned DataFrame, with only the columns relevant to the analysis:
+After these data-cleaning steps, the dataset now contains 234,429 rows and 28 columns. Below are the first 5 unique recipes of the cleaned DataFrame, with only the columns relevant to the analysis:
 
 | name                                 |     id |   minutes | submitted           | tags_list                                                                                                                                                                                                                                                                                          |   n_steps |   n_ingredients |   avg_rating |   calories |   protein |
 |:-------------------------------------|-------:|----------:|:--------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------:|----------------:|-------------:|-----------:|----------:|
@@ -91,7 +91,7 @@ The plot below visualizes the distribution of `n_steps` in the recipes, providin
   frameborder="0"
 ></iframe>
 
-Now, if we visualize the distribution of avg_rating we can gain valuable insight into the overall rating trends. The graphs displays a pronounced left skew, with most average ratings clustering around 5. This tells us that the majority of recipes in the dataset are highly rated (on average). Additionally, we can see that a significant portion of the data is concentrated near the upper end of the x-axis, with average ratings between 4 and 5. This further reinforces the dataset’s overall favorable ratings.
+Now, if we visualize the distribution of avg_rating we can gain valuable insight into the overall rating trends. The graph displays a pronounced left skew, with most average ratings clustering around 5. This tells us that the majority of recipes in the dataset are highly rated (on average). Additionally, we can see that a significant portion of the data is concentrated near the upper end of the x-axis, with average ratings between 4 and 5. This further reinforces the dataset’s overall favorable ratings.
 
 <iframe
   src="assets/univariate-avg_rating-distribution.html"
@@ -105,7 +105,7 @@ With these two plots, we are starting to address the main question posed in the 
 
 ### Bivariate Analysis
 
-To futher explore the relationship between `n_steps` and `avg_rating`, they are plotted together. In order to create this plot, the recipes were grouped into bins based on the `n_steps`. The plot shows us that most recipes, regardless of the number of steps, seems to have high average ratings. This supports our univariate analysis findings. We can see this by looking at the interquartile ranges (IQR) of each group. Interestingly, recipes with a higher number of steps do not show a significant drop in their average ratings, suggesting that the number of steps may not strongly affect the overall rating. 
+To further explore the relationship between `n_steps` and `avg_rating`, they are plotted together. In order to create this plot, the recipes were grouped into bins based on the `n_steps`. The plot shows us that most recipes, regardless of the number of steps, seem to have high average ratings. This supports our univariate analysis findings. We can see this by looking at the interquartile ranges (IQR) of each group. Interestingly, recipes with a higher number of steps do not show a significant drop in their average ratings, suggesting that the number of steps may not strongly affect the overall rating. 
 
 <iframe
   src="assets/bivariate-n_steps-boxplot.html"
@@ -114,7 +114,7 @@ To futher explore the relationship between `n_steps` and `avg_rating`, they are 
   frameborder="0"
 ></iframe>
 
-Next, let's look at another relationship, this time between the average rating of a recipe and the time it takes to make (`minutes`). A similar analysis was performed but here recipes were grouped by `minutes`. This plot shows that most recipes regardless of the `minutes` also seem to have high average ratings. This makes sense due to the large clustering we saw in our univariate analysis. However, when we look at the IQR for each group, we see the median graduadlly decreasing as the time increases. This suggests that recipes with higher cooking time might receive lower ratings. 
+Next, let's look at another relationship, this time between the average rating of a recipe and the time it takes to make (`minutes`). A similar analysis was performed but here recipes were grouped by `minutes`. This plot shows that most recipes regardless of the `minutes` also seem to have high average ratings. This makes sense due to the large clustering we saw in our univariate analysis. However, when we look at the IQR for each group, we see the median gradually decreasing as time increases. This suggests that recipes with higher cooking time might receive lower ratings. 
 
 <iframe
   src="assets/bivariate-minutes-boxplot.html"
@@ -123,13 +123,12 @@ Next, let's look at another relationship, this time between the average rating o
   frameborder="0"
 ></iframe>
 
-With this bivariate analysis, we can futher answer our main question.
+With this bivariate analysis, we can further answer our main question.
 
 
 ### Interesting Aggregates
-Embed at least one grouped table or pivot table in your website and explain its significance.
 
-Here, we can further examine the relationship between `n_steps` and key recipe characteristics, such as `avg_rating`, `n_ingredients`, and `minutes`. The table and plot below summarizes the mean `avg_rating`, `n_ingredients`, and `minutes` for each `n_steps` group. We can see how the variables change as the complexity of the recipe increases. If we zoom in on the `n_ingredients` column we can see that there is an increase in the avgerage number of ingreidents as the number of steps increase. We also see this pattern in the `minutes` column. However, if we look at the avg_rating column, it is a bit diffult to make the same conclusion as we see a lot more fluctuation in both the table and the plot as the number of steps increases.
+Here, we can further examine the relationship between `n_steps` and key recipe characteristics, such as `avg_rating`, `n_ingredients`, and `minutes`. The table and plot below summarize the mean `avg_rating`, `n_ingredients`, and `minutes` for each `n_steps` group. We can see how the variables change as the complexity of the recipe increases. If we zoom in on the `n_ingredients` column we can see that there is an increase in the average number of ingredients as the number of steps increase. We also see this pattern in the `minutes` column. However, if we look at the avg_rating column, it is a bit difficult to make the same conclusion as we see a lot more fluctuation in both the table and the plot as the number of steps increases.
 
 
 | n_steps | avg_rating | n_ingredients | minutes |
@@ -155,7 +154,7 @@ Here, we can further examine the relationship between `n_steps` and key recipe c
   frameborder="0"
 ></iframe>
 
-To look at the fluction examined above even deeper, we can look at the mean, median, maximum, and minimum values for each grouping. This highlights the variability within each group. We can observe in the plot that while the majority of recipes maintain high ratings, there are some lower ratings in more complex recipes (e.g., `n_steps`: 88), which gives us some insight into the ratings of recipes.
+To look at the fluctuation examined above even deeper, we can look at the mean, median, maximum, and minimum values for each grouping. This highlights the variability within each group. We can observe in the plot that while the majority of recipes maintain high ratings, there are some lower ratings in more complex recipes (e.g., `n_steps`: 88), which gives us some insight into the ratings of recipes.
 
 | n_steps | Mean | Median | Max  | Min  |
 |--------:|-----:|-------:|-----:|-----:|
@@ -179,14 +178,13 @@ To look at the fluction examined above even deeper, we can look at the mean, med
   frameborder="0"
 ></iframe>
 
-For the line plots above, feel free to interact (double click) with the legend to view each line clearly.
+For the line plots above, feel free to interact (double-click) with the legend to view each line clearly.
 
 ## Assessment of Missingness
 
 ### NMAR Analysis
 
-Looking at the dataset, there are three columns that have missing values: `description`, `rating` (and `avg_rating`), and `review`. Due to this, it will be meaningful to assess the missingness of the columns. Looking at the missing columns, there is reason to believe that the column `review` is considered Missing Not At Random (NMAR). The `review` column contains written reviews for recipes which could be missing due to various factors, one being an emotional one. For example, someone may only leave a review if the recipe was either a disaster or exceptional, while moderate experiences might be underrepresented. For instance, a failed recipe might prompt a negative review due to frustration, whereas a successful but unremarkable experience may result in no review at all. An additional piece of data that could change the classification of missingness from NMAR to MAR (Missing At Random), is if we had a column that indicated if the recipe succeeded, failed, or had moderate results. This added variable could help predict which reviews could be missing depending of the success rate of the attmepted recipe. 
-
+Looking at the dataset, there are three columns that have missing values: `description`, `rating` (and `avg_rating`), and `review`. Due to this, it will be meaningful to assess the missingness of the columns. Looking at the missing columns, there is reason to believe that the column `review` is considered Missing Not At Random (NMAR). The `review` column contains written reviews for recipes that could be missing due to various factors, one being an emotional one. For example, someone may only leave a review if the recipe was either a disaster or exceptional, while moderate experiences might be underrepresented. For instance, a failed recipe might prompt a negative review due to frustration, whereas a successful but unremarkable experience may result in no review at all. An additional piece of data that could change the classification of missingness from NMAR to MAR (Missing At Random), is if we had a column that indicated if the recipe succeeded, failed, or had moderate results. This added variable could help predict which reviews could be missing depending on the success rate of the attempted recipe. 
 
 ### Missingness Dependency
 
@@ -194,7 +192,7 @@ Now, let's assess the missingness of the `rating` column to determine if it is d
 
 > Rating and Number of Steps
 
-To start, there is reason to believe that ratings might be missing depending on the number of steps in a recipe. Intuitively, if a recipe has a moderate number of steps and is fairly straightforward, then people might not leave a review because the recipe met expectations without eliciting a strong reaction. To determine if missing ratings is dependent on the number of steps, a permutation test can be performed. 
+To start, there is reason to believe that ratings might be missing depending on the number of steps in a recipe. Intuitively, if a recipe has a moderate number of steps and is fairly straightforward, then people might not leave a review because the recipe met expectations without eliciting a strong reaction. To determine if missing ratings are dependent on the number of steps, a permutation test can be performed. 
 
 **Null Hypothesis**: The missingness of the `rating` column does not depend on the number of steps (`n_steps`) in the recipe.
 
@@ -222,7 +220,7 @@ Both the Kolmogorov-Smirnov (KS) test and the Absolute Difference in Means test 
 
 > Rating and Minutes
 
-Now the question arises: Is there a column that the `rating` column is not dependent on? To answer this question, let's run another perumation test. This permutation test asks whether the rating column's missingness depends on the minutes column.
+Now the question arises: Is there a column that the `rating` column is not dependent on? To answer this question, let's run another permutation test. This permutation test asks whether the rating column's missingness depends on the `minutes` column.
 
 **Null Hypothesis**: The missingness of the `rating` column does not depend on the number of minutes (`minutes`) in the recipe.
 
@@ -239,13 +237,13 @@ Now the question arises: Is there a column that the `rating` column is not depen
   frameborder="0"
 ></iframe>
 
-The Absolute Difference in Means test produced a p-value of **0.125**, which is greater than the significance level of 0.05. Thus, I fail to reject the null hypothesis, which suggests that that the missingness of the rating column does not depend on the number of minutes in the recipe.
+The Absolute Difference in Means test produced a p-value of **0.125**, which is greater than the significance level of 0.05. Thus, I fail to reject the null hypothesis, which suggests that the missingness of the rating column does not depend on the number of minutes in the recipe.
 
 ## Hypothesis Testing
 
-To further explore the main question-*Does the complexity of a recipe—measured by the number of steps or ingredients—affect how it is rated by others?*-it would be worth while to see the relationship between the number of steps and the rating. To investigate this, it will be useful to run a permutation test. A permutation test is prefered over a standard hypothesis test because the main goal is to determine whether the two groups-recipes with `n_steps` less than or equal to the median number of steps and recipes with `n_steps` greater than the median number of steps-look like they come from the same population. 
+To further explore the main question-*Does the complexity of a recipe—measured by the number of steps or ingredients—affect how it is rated by others?*-it would be worth while to see the relationship between the number of steps and the rating. To investigate this, it will be useful to run a permutation test. A permutation test is preferred over a standard hypothesis test because the main goal is to determine whether the two groups-recipes with `n_steps` less than or equal to the median number of steps and recipes with `n_steps` greater than the median number of steps-look like they come from the same population. 
 
-There is reason to hypothesize that recipes with more steps are rated lower on average. This could be due to their complexity intimidating or frustrating users, leading to lower ratings, or because such recipes are prone to execution errors, resulting in unsatisfactory outcomes. To test this, the test statistic of difference of means between the two groups was calculated. This is appropriate because the alternative hypothesis has a certain direction posits a specific direction: that recipes with more steps tend to receive lower ratings.
+There is reason to hypothesize that recipes with more steps are rated lower on average. This could be due to their complexity intimidating or frustrating users, leading to lower ratings, or because such recipes are prone to execution errors, resulting in unsatisfactory outcomes. To test this, the test statistic of the difference of means between the two groups was calculated. This is appropriate because the alternative hypothesis has a certain direction posits a specific direction: recipes with more steps tend to receive lower ratings.
 
 To investigate this, the following was conducted:
 
@@ -264,19 +262,19 @@ To investigate this, the following was conducted:
   frameborder="0"
 ></iframe>
 
-The permutation test produced a p-value of **0.045**, which is less than the significance level of 0.05. Thus, I reject the null hypothesis, which suggests that there is sufficient evidence to support the alternative hypothesis: recipes with more steps are rated lower on average. This adds some insight to the relationship between the number of steps of a recipe and it's rating. 
+The permutation test produced a p-value of **0.045**, which is less than the significance level of 0.05. Thus, I reject the null hypothesis, which suggests that there is sufficient evidence to support the alternative hypothesis: recipes with more steps are rated lower on average. This adds some insight to the relationship between the number of steps of a recipe and its rating. 
 
 ## Framing a Prediction Problem
 
-For the remainder of this report, I will address a prediction problem: predicting recipe ratings on a scale of 1 to 5. This is a **multiclass classification** problem because the ratings are discrete and fall into one of five categories (1, 2, 3, 4, or 5). I will use the average rating as the response variable since it provides a meaningful measure of recipe quality based on user feedback. However, the current `avg_rating` column is a continuous variable so I will use a rounded version instead. Predicting recipe ratings is valuable because it will help add insight to main question of the report. To predict ratings, I will use features available at the time of prediction, such as the number of steps or minutes in a recipe, as there is evidence of correlation between these feature and the response variable from previous analyses.
+For the remainder of this report, I will address a prediction problem: predicting recipe ratings on a scale of 1 to 5. This is a **multiclass classification** problem because the ratings are discrete and fall into one of five categories (1, 2, 3, 4, or 5). I will use the average rating as the response variable since it provides a meaningful measure of recipe quality based on user feedback. However, the current `avg_rating` column is a continuous variable so I will use a rounded version instead. Predicting recipe ratings is valuable because it will help add insight to the main question of the report. To predict ratings, I will use features available at the time of prediction, such as the number of steps or minutes in a recipe, as there is evidence of correlation between these features and the response variable from previous analyses.
 
-To evaluate my model, I will use **F1 score** over accuracy because the dataset has an imbalanced distribution of ratings, with a higher concentration in higher ratings. Since the F1 score balances percision and recall, it is better suited for imbalanced datasets like the one we have. The F1 score will provide a more nuanced understanding of model performance compared to accuracy alone.
+To evaluate my model, I will use **F1 score** over accuracy because the dataset has an imbalanced distribution of ratings, with a higher concentration in higher ratings. Since the F1 score balances precision and recall, it is better suited for imbalanced datasets like the one we have. The F1 score will provide a more nuanced understanding of model performance compared to accuracy alone.
 
 I plan to create a baseline model using two features, `minutes` and `n_steps`, to predict ratings. From there, I will enhance the model by incorporating additional features and advanced techniques.
 
 ## Baseline Model
 
-The first step in tackling the prediction problem is creating a baseline model to later improve upon. The baseline model in this section predicts the rounded average ratings of recipes based on two features: the number of steps (`n_steps`) and the cooking time (`minutes`). As previously mentioned, the original average ratings column contained continuous variables, but to approach the prediciton problem, they were converted to categorical variables through rounding. The data was further cleaned in this section by dropping all the rows with missing values in the target column of rounded average ratings. I made the decision to drop these rows rather then impute them as they made up less than $1%$ of the data, and imputation would introduce randomness, which I am trying to minimize. 
+The first step in tackling the prediction problem is creating a baseline model to later improve upon. The baseline model in this section predicts the rounded average ratings of recipes based on two features: the number of steps (`n_steps`) and the cooking time (`minutes`). As previously mentioned, the original average ratings column contained continuous variables, but to approach the prediction problem, they were converted to categorical variables through rounding. The data was further cleaned in this section by dropping all the rows with missing values in the target column of rounded average ratings. I made the decision to drop these rows rather than impute them as they made up less than 1% of the data, and imputation would introduce randomness, which I am trying to minimize. 
 
 For the baseline model, two main features were used:
 
@@ -287,7 +285,7 @@ Both of the features used are numerical quantitiative variables. There were no o
 
 Regarding column transformation, `minutes` was standardized using `StandardScalar` since the column contained many outliers. Standardizing it, although it does not drastically affect the results of the model, will help bring the column into a comparable range. The `n_steps` column was not transformed for this model. 
 
-As for the actual model, I decided to use a Random Forest Classifier. The Random Forest Classifier was chosen for strengths in handling numerical and categorical variables (which will be implemented in the final model), its robustness to overfitting (which can be further advanced by tuning its hyperparameters), and its ability to capture non-linear relationships in the data which is useful for predicting ratings.
+As for the actual model, I decided to use a Random Forest Classifier. The Random Forest Classifier was chosen for its strengths in handling numerical and categorical variables (which will be implemented in the final model), its robustness to overfitting (which can be further advanced by tuning its hyperparameters), and its ability to capture non-linear relationships in the data which is useful for predicting ratings.
 
 The model was then trained on the training data and evaluated on the test data using the F1 score. As previously mentioned, the F1 score was chosen due to the skewness of the higher ratings as seen below:
 
@@ -327,7 +325,7 @@ In this analysis, let's explore whether the model exhibits bias when it comes to
 - High Protein: Recipes with more than 18 grams of protein
 - Low Protein: Recipes with less than or equal to 18 grams of protein
 
-The threshold of 18 grams of protein represents the median amount of protein across all recipes. The median amount of protien was chosen over the mean because the data contains some outliers that could skew the mean. The box plot below highlights these outliers.
+The threshold of 18 grams of protein represents the median amount of protein across all recipes. The median amount of protein was chosen over the mean because the data contains some outliers that could skew the mean. The box plot below highlights these outliers.
 
 <iframe
   src="assets/fairness-analysis-protein-outliers.html"
@@ -336,9 +334,9 @@ The threshold of 18 grams of protein represents the median amount of protein acr
   frameborder="0"
 ></iframe>
 
-The evaluation metric used will be **percision parity** for the two groups. Percision is prioritized for this model compared to other metrics since correctly identifying the recipe rating among all instances of that recipe rating is more important. False positives can mislead individuals with inaccurate ratings. For an individual who is selecting recipes based on their protien levels, percision will make sure that when a model predicts a recipes as highly rated (4,5), the recipe will also be satisifactory for the person. This specific grouping could be very helpful for individuals who are concerned with their protein intake and rely on these predicitons to make good choice about their diet. Having higher false positives (incorrect high ratings) could lead individuals to be disappointed. 
+The evaluation metric used will be **precision parity** for the two groups. Precision is prioritized for this model compared to other metrics since correctly identifying the recipe rating among all instances of that recipe rating is more important. False positives can mislead individuals with inaccurate ratings. For an individual who is selecting recipes based on their protein levels, precision will make sure that when a model predicts a recipe as highly rated (4,5), the recipe will also be satisfactory for the person. This specific grouping could be very helpful for individuals who are concerned with their protein intake and rely on these predictions to make good choices about their diet. Having higher false positives (incorrect high ratings) could lead individuals to be disappointed. 
 
-Focusings on percision parity helps determine whether the model is biased towards one group over the other when making predicitions. 
+Focusing on precision parity helps determine whether the model is biased towards one group over the other when making predictions. 
 
 **Null Hypothesis**: The model is fair. Its precision for recipes with higher protein levels and lower protein levels is roughly the same, and any differences are due to random chance.
 
