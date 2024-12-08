@@ -304,7 +304,7 @@ Optional: Embed a visualization related to your permutation test in your website
 
 <iframe
   src="assets/fairness-analysis-protein.html"
-  width="600"
+  width="620"
   height="450"
   frameborder="0"
 ></iframe>
