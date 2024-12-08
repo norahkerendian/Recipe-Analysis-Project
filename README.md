@@ -1,4 +1,5 @@
 # Recipe Ratings Unveiled: Predicting Success Through Steps, Time, and Ingredients
+
 Author: Norah Kerendian
 
 ## Introduction
@@ -274,9 +275,41 @@ To evaluate my model, I will use **F1 score** over accuracy because the dataset 
 I plan to create a baseline model using two features, `minutes` and `n_steps`, to predict ratings. From there, I will enhance the model by incorporating additional features and advanced techniques.
 
 ## Baseline Model
-Describe your model and state the features in your model, including how many are quantitative, ordinal, and nominal, and how you performed any necessary encodings. Report the performance of your model and whether or not you believe your current model is “good” and why.
 
-Tip: Make sure to hit all of the points above: many projects in the past have lost points for not doing so.
+The first step in tackling the prediction problem is creating a baseline model to later improve upon. The baseline model in this section predicts the rounded average ratings of recipes based on two features: the number of steps (`n_steps`) and the cooking time (`minutes`). As previously mentioned, the original average ratings column contained continuous variables, but to approach the prediciton problem, they were converted to categorical variables through rounding. The data was further cleaned in this section by dropping all the rows with missing values in the target column of rounded average ratings. I made the decision to drop these rows rather then impute them as they made up less than $1%$ of the data, and imputation would introduce randomness, which I am trying to minimize. 
+
+For the baseline model, two main features were used:
+
+- `n_steps`: A quantitative feature representing the number of steps in the recipe.
+- `minutes`: A quantitative feature representing the cooking time in minutes.
+
+Both of the features used are numerical quantitiative variables. There were no ordinal or nominal features included in the baseline model. The target column, as describe earlier, is now a categorical ordinal variable. 
+
+Regarding column transformation, `minutes` was standardized using `StandardScalar` since the column contained many outliers. Standardizing it, although it does not drastically affect the results of the model, will help bring the column into a comparable range. The `n_steps` column was not transformed for this model. 
+
+As for the actual model, I decided to use a Random Forest Classifier. The Random Forest Classifier was chosen for strengths in handling numerical and categorical variables (which will be implemented in the final model), its robustness to overfitting (which can be further advanced by tuning its hyperparameters), and its ability to capture non-linear relationships in the data which is useful for predicting ratings.
+
+The model was then trained on the training data and evaluated on the test data using the F1 score. As previously mentioned, the F1 score was chosen due to the skewness of the higher ratings as seen below:
+
+|   avg_rating_rounded |   count |
+|---------------------:|--------:|
+|                    5 |  171448 |
+|                    4 |   53696 |
+|                    3 |    4601 |
+|                    2 |    1207 |
+|                    1 |     700 |
+
+The F1 score for the baseline model was **0.67**, which indicates moderate performance in predicting the ratings. To further understand the F1 score for each category of rating, here are the individual scores: 
+
+- Rating 1: F1 score = 0.01
+- Rating 2: F1 score = 0.10
+- Rating 3: F1 score = 0.09
+- Rating 4: F1 score = 0.18
+- Rating 5: F1 score = 0.86
+
+As we can see, the baseline model does not perform well for lower ratings (1, 2, and 3) but it performs very well for higher ratings, specifically ratings of 5. This suggests that the model is good at make predictions for higher ratings but less effective for lower ratings. This will be important to keep in mind when feature engineering for the final model. 
+
+In conclusion, while this model performs decently for higher ratings, there is lots of room for improvement, especially when focusing on the lower ratings. I believe that the current model is moderate and could definitely be improved, particularly given the very low scores for the lower ratings. It is important for the model to make accurate predictions for lower ratings as well, as it will help individuals searching for recipes avoid the "bad" ones. 
 
 
 ## Final Model
@@ -322,5 +355,5 @@ Focusings on percision parity helps determine whether the model is biased toward
   frameborder="0"
 ></iframe>
 
-The permutation test produced a p-value of **0.0**, which is less than the significance level of 0.05. Thus, I reject the null hypothesis that the model is fair. This suggests that the model’s precision for recipes with lower protein is lower than its precision for recipes with higher protein.
+After 1,000 samples, the permutation test produced a p-value of **0.0**, which is less than the significance level of 0.05. Thus, I reject the null hypothesis that the model is fair. This suggests that the model’s precision for recipes with lower protein is lower than its precision for recipes with higher protein.
 
