@@ -293,3 +293,21 @@ p
 -value, and your conclusion.
 
 Optional: Embed a visualization related to your permutation test in your website.
+
+**Null Hypothesis**: The model is fair. Its precision for recipes with higher protein levels and lower protein levels are roughly the same, and any differences are due to random chance.
+
+**Alternative Hypothesis**: The model is unfair. Its precision for recipes with lower protein levels is lower than its precision for recipes with higher protein levels.
+
+**Test Statistic**: Difference in Precision (Low Protein - High Protein)
+
+**Significance Level**: 0.05
+
+<iframe
+  src="assets/fairness-analysis-protein.html"
+  width="600"
+  height="450"
+  frameborder="0"
+></iframe>
+
+p-value = 0.0 < 0.05, reject the null hypothesis that our model is fair. The model’s precision for recipes with lower protein is lower than its precision for recipes with higher protein.
+
