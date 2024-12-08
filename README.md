@@ -85,7 +85,7 @@ The plot below visualizes the distribution of `n_steps` in the recipes, providin
 
 <iframe
   src="assets/univariate-n_steps-distribution.html"
-  width="600"
+  width="620"
   height="450"
   frameborder="0"
 ></iframe>
@@ -94,7 +94,7 @@ Now, if we visualize the distribution of avg_rating we can gain valuable insight
 
 <iframe
   src="assets/univariate-avg_rating-distribution.html"
-  width="600"
+  width="620"
   height="450"
   frameborder="0"
 ></iframe>
@@ -108,7 +108,7 @@ To futher explore the relationship between `n_steps` and `avg_rating`, they are 
 
 <iframe
   src="assets/bivariate-n_steps-boxplot.html"
-  width="600"
+  width="620"
   height="450"
   frameborder="0"
 ></iframe>
@@ -117,7 +117,7 @@ Next, let's look at another relationship, this time between the average rating o
 
 <iframe
   src="assets/bivariate-minutes-boxplot.html"
-  width="600"
+  width="620"
   height="450"
   frameborder="0"
 ></iframe>
@@ -149,7 +149,7 @@ Here, we can further examine the relationship between `n_steps` and key recipe c
 <iframe
   src="assets/interesting-aggregate-n_steps-lineplot
 .html"
-  width="600"
+  width="620"
   height="450"
   frameborder="0"
 ></iframe>
@@ -173,7 +173,7 @@ To look at the fluction examined above even deeper, we can look at the mean, med
 
 <iframe
   src="assets/interesting-aggregate-n_steps-avg_rating-lineplot.html"
-  width="600"
+  width="620"
   height="450"
   frameborder="0"
 ></iframe>
@@ -205,14 +205,14 @@ To start, there is reason to believe that ratings might be missing depending on 
 
 <iframe
   src="assets/missingness-n_steps_reject_null.html"
-  width="600"
+  width="620"
   height="450"
   frameborder="0"
 ></iframe>
 
 <iframe
   src="assets/missingness-n_steps-kde_map-reject-null.html"
-  width="600"
+  width="620"
   height="450"
   frameborder="0"
 ></iframe>
@@ -233,7 +233,7 @@ Now the question arises: Is there a column that the `rating` column is not depen
 
 <iframe
   src="assets/missingness-n_steps_fail-to-reject-null.html"
-  width="600"
+  width="620"
   height="450"
   frameborder="0"
 ></iframe>
@@ -258,7 +258,7 @@ To investigate this, the following was conducted:
 
 <iframe
   src="assets/hypothesis-testing-n_steps.html"
-  width="600"
+  width="620"
   height="450"
   frameborder="0"
 ></iframe>
