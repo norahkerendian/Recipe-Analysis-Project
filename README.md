@@ -288,15 +288,28 @@ Optional: Include a visualization that describes your model’s performance, e.g
 
 
 ## Fairness Analysis
-Clearly state your choice of Group X and Group Y, your evaluation metric, your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
-p
--value, and your conclusion.
 
-Optional: Embed a visualization related to your permutation test in your website.
+In this analysis, let's explore whether the model exhibits bias when it comes to predicting ratings for two groups: 
 
-**Null Hypothesis**: The model is fair. Its precision for recipes with higher protein levels and lower protein levels are roughly the same, and any differences are due to random chance.
+- High Protein: Recipes with more than 18 grams of protein
+- Low Protein: Recipes with less than or equal to 18 grams of protein
 
-**Alternative Hypothesis**: The model is unfair. Its precision for recipes with lower protein levels is lower than its precision for recipes with higher protein levels.
+The threshold of 18 grams of protein represents the median amount of protein across all recipes. The median amount of protien was chosen over the mean because the data contains some outliers that could skew the mean. The box plot below highlights these outliers.
+
+<iframe
+  src="assets/fairness-analysis-protein-outliers.html"
+  width="620"
+  height="450"
+  frameborder="0"
+></iframe>
+
+The evaluation metric used will be **percision parity** for the two groups. Percision is prioritized for this model compared to other metrics since correctly identifying the recipe rating among all instances of that recipe rating is more important. False positives can mislead individuals with inaccurate ratings. For an individual who is selecting recipes based on their protien levels, percision will make sure that when a model predicts a recipes as highly rated (4,5), the recipe will also be satisifactory for the person. This specific grouping could be very helpful for individuals who are concerned with their protein intake and rely on these predicitons to make good choice about their diet. Having higher false positives (incorrect high ratings) could lead individuals to be disappointed. 
+
+Focusings on percision parity helps determine whether the model is biased towards one group over the other when making predicitions. 
+
+**Null Hypothesis**: The model is fair. Its precision for recipes with higher protein levels and lower protein levels is roughly the same, and any differences are due to random chance.
+
+**Alternative Hypothesis**: The model is unfair. Its precision for recipes with lower protein levels is lower than that for recipes with higher protein levels.
 
 **Test Statistic**: Difference in Precision (Low Protein - High Protein)
 
@@ -309,5 +322,5 @@ Optional: Embed a visualization related to your permutation test in your website
   frameborder="0"
 ></iframe>
 
-p-value = 0.0 < 0.05, reject the null hypothesis that our model is fair. The model’s precision for recipes with lower protein is lower than its precision for recipes with higher protein.
+The permutation test produced a p-value of **0.0**, which is less than the significance level of 0.05. Thus, I reject the null hypothesis that the model is fair. This suggests that the model’s precision for recipes with lower protein is lower than its precision for recipes with higher protein.
 
