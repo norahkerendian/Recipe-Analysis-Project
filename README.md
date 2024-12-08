@@ -266,10 +266,12 @@ To investigate this, the following was conducted:
 The permutation test produced a p-value of **0.045**, which is less than the significance level of 0.05. Thus, I reject the null hypothesis, which suggests that there is sufficient evidence to support the alternative hypothesis: recipes with more steps are rated lower on average. This adds some insight to the relationship between the number of steps of a recipe and it's rating. 
 
 ## Framing a Prediction Problem
-Clearly state your prediction problem and type (classification or regression). If you are building a classifier, make sure to state whether you are performing binary classification or multiclass classification. Report the response variable (i.e. the variable you are predicting) and why you chose it, the metric you are using to evaluate your model and why you chose it over other suitable metrics (e.g. accuracy vs. F1-score).
 
-Note: Make sure to justify what information you would know at the “time of prediction” and to only train your model using those features. For instance, if we wanted to predict your final exam grade, we couldn’t use your Final Project grade, because the project is only due after the final exam! Feel free to ask questions if you’re not sure.
+For the remainder of this report, I will address a prediction problem: predicting recipe ratings on a scale of 1 to 5. This is a **multiclass classification** problem because the ratings are discrete and fall into one of five categories (1, 2, 3, 4, or 5). I will use the average rating as the response variable since it provides a meaningful measure of recipe quality based on user feedback. However, the current `avg_rating` column is a continuous variable so I will use a rounded version instead. Predicting recipe ratings is valuable because it will help add insight to main question of the report. To predict ratings, I will use features available at the time of prediction, such as the number of steps or minutes in a recipe, as there is evidence of correlation between these feature and the response variable from previous analyses.
 
+To evaluate my model, I will use **F1 score** over accuracy because the dataset has an imbalanced distribution of ratings, with a higher concentration in higher ratings. Since the F1 score balances percision and recall, it is better suited for imbalanced datasets like the one we have. The F1 score will provide a more nuanced understanding of model performance compared to accuracy alone.
+
+I plan to create a baseline model using two features, `minutes` and `n_steps`, to predict ratings. From there, I will enhance the model by incorporating additional features and advanced techniques.
 
 ## Baseline Model
 Describe your model and state the features in your model, including how many are quantitative, ordinal, and nominal, and how you performed any necessary encodings. Report the performance of your model and whether or not you believe your current model is “good” and why.
