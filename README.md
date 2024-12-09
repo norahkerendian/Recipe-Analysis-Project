@@ -317,6 +317,12 @@ Describe the modeling algorithm you chose, the hyperparameters that ended up per
 
 Optional: Include a visualization that describes your model’s performance, e.g. a confusion matrix, if applicable.
 
+<iframe
+  src="assets/final-model-confusion-matrix.html"
+  width="620"
+  height="450"
+  frameborder="0"
+></iframe>
 
 ## Fairness Analysis
 
