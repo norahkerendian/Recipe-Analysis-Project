@@ -241,7 +241,7 @@ The Absolute Difference in Means test produced a p-value of **0.125**, which is 
 
 ## Hypothesis Testing
 
-To further explore the main question-*Does the complexity of a recipe—measured by the number of steps or minutes—affect how it is rated by others?*-it would be worth while to see the relationship between the number of steps and the rating. To investigate this, it will be useful to run a permutation test. A permutation test is preferred over a standard hypothesis test because the main goal is to determine whether the two groups-recipes with `n_steps` less than or equal to the median number of steps and recipes with `n_steps` greater than the median number of steps-look like they come from the same population. 
+To further explore the main question-*Does the complexity of a recipe—measured by the number of steps or minutes—affect how it is rated by others?*-it would be worthwhile to see the relationship between the number of steps and the rating. To investigate this, it will be useful to run a permutation test. A permutation test is preferred over a standard hypothesis test because the main goal is to determine whether the two groups-recipes with `n_steps` less than or equal to the median number of steps and recipes with `n_steps` greater than the median number of steps-look like they come from the same population. 
 
 There is reason to hypothesize that recipes with more steps are rated lower on average. This could be due to their complexity intimidating or frustrating users, leading to lower ratings, or because such recipes are prone to execution errors, resulting in unsatisfactory outcomes. To test this, the test statistic of the difference of means between the two groups was calculated. This is appropriate because the alternative hypothesis has a certain direction posits a specific direction: recipes with more steps tend to receive lower ratings.
 
@@ -264,7 +264,7 @@ To investigate this, the following was conducted:
   frameborder="0"
 ></iframe>
 
-The permutation test produced a p-value of **0.045**, which is less than the significance level of 0.05. Thus, I reject the null hypothesis, which suggests that there is sufficient evidence to support the alternative hypothesis: recipes with more steps are rated lower on average. This adds some insight to the relationship between the number of steps of a recipe and its rating. 
+The permutation test produced a p-value of **0.045**, which is less than the significance level of 0.05. Thus, I reject the null hypothesis, which suggests that there is sufficient evidence to support the alternative hypothesis: recipes with more steps are rated lower on average. This adds some insight into the relationship between the number of steps of a recipe and its rating. 
 
 ## Framing a Prediction Problem
 
@@ -283,7 +283,7 @@ For the baseline model, two main features were used:
 - `n_steps`: A quantitative feature representing the number of steps in the recipe.
 - `minutes`: A quantitative feature representing the cooking time in minutes.
 
-Both of the features used are numerical quantitiative variables. There were no ordinal or nominal features included in the baseline model. The target column, as describe earlier, is now a categorical ordinal variable. 
+Both of the features used are numerical quantitative variables. There were no ordinal or nominal features included in the baseline model. The target column, as described earlier, is now a categorical ordinal variable. 
 
 Regarding column transformation, `minutes` was standardized using `StandardScalar` since the column contained many outliers. Standardizing it, although it does not drastically affect the results of the model, will help bring the column into a comparable range. The `n_steps` column was not transformed for this model. 
 
@@ -322,7 +322,7 @@ The `minutes` column was selected due to its observed relationship with the `avg
 
 `submitted`
 
-The `submitted` column was originally selected due to speculation that ratings might vary by the year or season in which a recipe was submitted. To look into this, analysis was conducted which concluded that more recent submissions tend to have lower average ratings. This could be due to newer recipes having received less attention or reviews. This information is helpful in improving the model. So, I feature-engineered the `submitted` column. A function was created to extract the year of each value. This was incorporated into the pipeline using a `FunctionTransformer`, followed by `OneHotEncoder` to represent the year as categorical data. I believe this will help improve my model's performance as there seems to be a trend between the year of the `submitted` column and the ratings of recipes.
+The `submitted` column was originally selected due to speculation that ratings might vary by the year or season in which a recipe was submitted. To look into this, an analysis was conducted which concluded that more recent submissions tend to have lower average ratings. This could be due to newer recipes having received less attention or reviews. This information is helpful in improving the model. So, I feature-engineered the `submitted` column. A function was created to extract the year of each value. This was incorporated into the pipeline using a `FunctionTransformer`, followed by `OneHotEncoder` to represent the year as categorical data. I believe this will help improve my model's performance as there seems to be a trend between the year of the `submitted` column and the ratings of recipes.
 
 `lower_median_steps`
 
@@ -353,8 +353,8 @@ Not only did the overall F1 score increase but each individual category also saw
 
 <iframe
   src="assets/final-model-confusion-matrix.html"
-  width="900"
-  height="720"
+  width="910"
+  height="710"
   frameborder="0"
 ></iframe>
 
