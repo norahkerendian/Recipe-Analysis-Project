@@ -336,7 +336,7 @@ The `calories` and `protein` columns were selected based on speculation that rec
 
 The `tags_list` column was included due to speculation that recipes with more tags might receive higher ratings. Tags function like hashtags on this website, potentially increasing visibility and engagement with certain recipes. This was further investigated using a bar plot that compared the number of tags with the average rating. My speculation was supported and the bar plot showed that recipes with longer tag lists tend to have slightly higher average ratings. To incorporate this, a function was created to extract the length of each list in `tags_list` and was used in my model's pipeline. I believe this information will help predict more accurate ratings, particularly on the higher end of the scale.
 
-As for the actual model, I continued to use a `RandomForestClassifier`. To optimize performance I applied `GridSearchCV` to perform cross-validation and hyperparameter tuning. The hyperparameters used were `max_depth` and `n_estimators`. The best parameters found were the following:
+As for the actual model, I continued to use a `RandomForestClassifier`. To optimize performance I applied `GridSearchCV` to perform 5-fold cross-validation and hyperparameter tuning. The hyperparameters used were `max_depth` and `n_estimators`. The best parameters found were the following:
 
 - `max_depth`: 24
 - `n_estimators`: 350
