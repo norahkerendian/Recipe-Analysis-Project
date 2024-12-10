@@ -358,6 +358,8 @@ Not only did the overall F1 score increase but each individual category also saw
   frameborder="0"
 ></iframe>
 
+![Confusion Matrix](confusion_matrix.png)
+
 In conclusion, the final model demonstrates significant improvement over the baseline model due to the addition of feature engineering and optimization of hyperparameters. These adjustments allowed the model to better capture the relationships in the data between various columns, leading to improved accuracy and predictive power.
 
 ## Fairness Analysis
