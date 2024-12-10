@@ -351,7 +351,7 @@ To evaluate my model, I continued to use the F1 score to best compare the improv
 
 Not only did the overall F1 score increase but each individual category also saw significant improvement. This can be further visualized the the Confusion Matrix below:
 
-![Confusion Matrix](confusion_matrix.png)
+![Confusion Matrix](assets/confusion_matrix.png)
 
 In conclusion, the final model demonstrates significant improvement over the baseline model due to the addition of feature engineering and optimization of hyperparameters. These adjustments allowed the model to better capture the relationships in the data between various columns, leading to improved accuracy and predictive power.
 
