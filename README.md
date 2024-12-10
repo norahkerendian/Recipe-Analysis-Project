@@ -353,8 +353,8 @@ Not only did the overall F1 score increase but each individual category also saw
 
 <iframe
   src="assets/final-model-confusion-matrix.html"
-  width="850"
-  height="700"
+  width="900"
+  height="720"
   frameborder="0"
 ></iframe>
 
