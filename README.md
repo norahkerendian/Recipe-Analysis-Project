@@ -287,7 +287,7 @@ Both of the features used are numerical quantitative variables. There were no or
 
 Regarding column transformation, `minutes` was standardized using `StandardScalar` since the column contained many outliers. Standardizing it, although it does not drastically affect the results of the model, will help bring the column into a comparable range. The `n_steps` column was not transformed for this model. 
 
-As for the actual model, I decided to use a Random Forest Classifier. The Random Forest Classifier was chosen for its strengths in handling numerical and categorical variables (which will be implemented in the final model), its robustness to overfitting (which can be further advanced by tuning its hyperparameters), and its ability to capture non-linear relationships in the data which is useful for predicting ratings.
+As for the actual model, I decided to use a `RandomForestClassifier`. The `RandomForestClassifier` was chosen for its strengths in handling numerical and categorical variables (which will be implemented in the final model), its robustness to overfitting (which can be further advanced by tuning its hyperparameters), and its ability to capture non-linear relationships in the data which is useful for predicting ratings.
 
 The model was then trained on the training data and evaluated on the test data using the F1 score. As previously mentioned, the F1 score was chosen due to the skewness of the higher ratings as seen below:
 
@@ -352,7 +352,7 @@ To evaluate my model, I continued to use the F1 score to best compare the improv
 Not only did the overall F1 score increase but each individual category also saw significant improvement. This can be further visualized the the Confusion Matrix below:
 
 <iframe
-  src="assets/final-model-confusion-matrix.html"
+  src="assets/confusion_matrix.html"
   width="910"
   height="710"
   frameborder="0"
