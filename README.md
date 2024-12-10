@@ -313,23 +313,20 @@ In conclusion, while this model performs decently for higher ratings, there is l
 
 
 ## Final Model
-State the features you added and why they are good for the data and prediction task. Note that you can’t simply state “these features improved my accuracy”, since you’d need to choose these features and fit a model before noticing that – instead, talk about why you believe these features improved your model’s performance from the perspective of the data generating process.
-
-Describe the modeling algorithm you chose, the hyperparameters that ended up performing the best, and the method you used to select hyperparameters and your overall model. Describe how your Final Model’s performance is an improvement over your Baseline Model’s performance.
 
 In the final model, I decided to focus on the following columns as features: `minutes`, `submitted`, `lower_median_steps`, `calories`, `protein`, and `tags_list`. Below, I will discuss the feature engineering applied and why each column is relevant for improving my baseline model. 
 
 `minutes`
 
-The `minutes` column was selected due to its observed relationship with the `avg_rating` column. Specifically, during the bivariate analysis, it was noticed that median ratings gradually decreased as minutes increased. This trend suggests that recipes with longer cooking time might receive lower ratings. With this, using the minutes column would be beneficial to predicting both lower and higher rating. In the baseline model this column was included and standardized using `StandardScalar`. To improve upon this, I applied a different yet similar transformer to `minutes`, `RobustScaler()`. This will normalize the variability of the `minutes` column while also mitigating the influence of the extreme outliers we noticed in the baseline model. This adjustiment should improve my model's performance as the relationship between minutes and ratings is an informative feature for predicting outcomes.
+The `minutes` column was selected due to its observed relationship with the `avg_rating` column. Specifically, during the bivariate analysis, it was noticed that median ratings gradually decreased as minutes increased. This trend suggests that recipes with longer cooking time might receive lower ratings. With this, using the minutes column would be beneficial for predicting both lower and higher ratings. In the baseline model, this column was included and standardized using `StandardScalar`. To improve upon this, I applied a different yet similar transformer to `minutes`, `RobustScaler()`. This will normalize the variability of the `minutes` column while also mitigating the influence of the extreme outliers we noticed in the baseline model. This adjustment should improve my model's performance as the relationship between minutes and ratings is an informative feature for predicting outcomes.
 
 `submitted`
 
-The `submitted` column was originally selected due to speculation that ratings might vary by the year or season in which a recipe was submitted. To look into this, analysis was done that concluded that more recent submissions tend to have lower average ratings. This could be due to newer recipes have receiving less attention or reviews. This infomatation is helpful to improving the model. So, I feature engineered the `submitted` column. A function was created to extract the year of each value. This was incorporated into the pipeline using a `FunctionTransformer`, followed by `OneHotEncoder` to represent the year as categorical data. I believe this will help improve my model's performace as there seems to be a trend between the year of the `submitted` column and the ratings of recipes.
+The `submitted` column was originally selected due to speculation that ratings might vary by the year or season in which a recipe was submitted. To look into this, analysis was conducted which concluded that more recent submissions tend to have lower average ratings. This could be due to newer recipes having received less attention or reviews. This information is helpful in improving the model. So, I feature-engineered the `submitted` column. A function was created to extract the year of each value. This was incorporated into the pipeline using a `FunctionTransformer`, followed by `OneHotEncoder` to represent the year as categorical data. I believe this will help improve my model's performance as there seems to be a trend between the year of the `submitted` column and the ratings of recipes.
 
 `lower_median_steps`
 
-The `lower_median_steps` column was created during the hypothesis test conducted earlier. This column was originially created to aid in the permutation test of exploring whether recipes with more steps tend to have lower ratings. The test concluded that there is sufficient evidence to support this hypothesis, as recipes with more steps are rated lower on average. This means that using the `lower_median_steps` column could further improve my model. A `OneHotEncoder` was used to categorize the column and treat each category equally. Incorporating this feature should improve the model’s ability to predict ratings by leveraging the relationship between `n_steps` and ratings.
+The `lower_median_steps` column was created during the hypothesis test conducted earlier. This column was originally created to aid in the permutation test of exploring whether recipes with more steps tend to have lower ratings. The test concluded that there is sufficient evidence to support this hypothesis, as recipes with more steps are rated lower on average. This means that using the `lower_median_steps` column could further improve my model. A `OneHotEncoder` was used to categorize the column and treat each category equally. Incorporating this feature should improve the model’s ability to predict ratings by leveraging the relationship between `n_steps` and ratings.
 
 `calories` and `protein`
 
@@ -337,7 +334,7 @@ The `calories` and `protein` columns were selected based on speculation that rec
 
 `tags_list`
 
-The `tags_list` column was included due to speculation that recipes with more tags might receive higher ratings. Tags function like hashtags on this website, potentially increasing visibility and engagement with certain recipes. This was further investiagted using a bar plot that compared the number of tags with the average rating. My speculation was supported and the bar plot showed that recipes with longer tag lists tend to have slightly higher average ratings. To incorporate this, a function was created to extract the length of each list in `tags_list` and was used in my model's pipeline. I believe this information will help predict more accurate ratings, particularly on the higher end of the scale.
+The `tags_list` column was included due to speculation that recipes with more tags might receive higher ratings. Tags function like hashtags on this website, potentially increasing visibility and engagement with certain recipes. This was further investigated using a bar plot that compared the number of tags with the average rating. My speculation was supported and the bar plot showed that recipes with longer tag lists tend to have slightly higher average ratings. To incorporate this, a function was created to extract the length of each list in `tags_list` and was used in my model's pipeline. I believe this information will help predict more accurate ratings, particularly on the higher end of the scale.
 
 As for the actual model, I continued to use a `RandomForestClassifier`. To optimize performance I applied `GridSearchCV` to perform cross-validation and hyperparameter tuning. The hyperparameters used were `max_depth` and `n_estimators`. The best parameters found were the following:
 
@@ -352,16 +349,16 @@ To evaluate my model, I continued to use the F1 score to best compare the improv
 - Rating 4: F1 score = 0.73
 - Rating 5: F1 score = 0.92
 
-Not only did the over all F1 score increase but each individual category also saw significant improvement. This can be further visualized the the Confusion Matrix below:
+Not only did the overall F1 score increase but each individual category also saw significant improvement. This can be further visualized the the Confusion Matrix below:
 
 <iframe
   src="assets/final-model-confusion-matrix.html"
-  width="820"
-  height="650"
+  width="850"
+  height="700"
   frameborder="0"
 ></iframe>
 
-In conclusion, the final model demonstres significant improvement over the baseline model due to the addition of feature engineering and optimization of hyperparameters. 
+In conclusion, the final model demonstrates significant improvement over the baseline model due to the addition of feature engineering and optimization of hyperparameters. These adjustments allowed the model to better capture the relationships in the data between various columns, leading to improved accuracy and predictive power.
 
 ## Fairness Analysis
 
