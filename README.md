@@ -1,4 +1,4 @@
-# Recipe Ratings Unveiled: Predicting Success Through Steps, Time, and Ingredients
+# Recipe Ratings Unveiled: Predicting Success Through Complexity
 
 Author: Norah Kerendian
 
@@ -34,7 +34,7 @@ The `interactions` dataset consisted of 731,927 rows of ratings/reviews of recip
 | `rating`   | Rating given                      |
 | `review`   | Review text                       |
 
-But beyond the personal convenience mentioned above, an interesting question arises from these datasets: **Does the complexity of a recipe—measured by the number of steps or ingredients—affect how it is rated by others?** This report explores whether the number of steps, preparation time, or ingredients in a recipe impacts its likelihood of receiving higher ratings. Are recipes with fewer steps more highly rated due to their simplicity, or do elaborate recipes earn higher reviews for their complexity? Is it possible to accurately predict the rating of a recipe based on these factors? 
+But beyond the personal convenience mentioned above, an interesting question arises from these datasets: **Does the complexity of a recipe—measured by the number of steps or minutes—affect how it is rated by others?** This report explores whether the number of steps or the preparation time in a recipe impacts its likelihood of receiving higher ratings. Are recipes with fewer steps more highly rated due to their simplicity, or do elaborate recipes earn higher reviews for their complexity? Is it possible to accurately predict the rating of a recipe based on these factors? 
 
 Not all columns are relevant to this analysis, so the focus will be on key columns: `minutes`, `n_steps`, `n_ingredients`, and `rating`.
 
@@ -241,9 +241,11 @@ The Absolute Difference in Means test produced a p-value of **0.125**, which is 
 
 ## Hypothesis Testing
 
-To further explore the main question-*Does the complexity of a recipe—measured by the number of steps or ingredients—affect how it is rated by others?*-it would be worth while to see the relationship between the number of steps and the rating. To investigate this, it will be useful to run a permutation test. A permutation test is preferred over a standard hypothesis test because the main goal is to determine whether the two groups-recipes with `n_steps` less than or equal to the median number of steps and recipes with `n_steps` greater than the median number of steps-look like they come from the same population. 
+To further explore the main question-*Does the complexity of a recipe—measured by the number of steps or minutes—affect how it is rated by others?*-it would be worth while to see the relationship between the number of steps and the rating. To investigate this, it will be useful to run a permutation test. A permutation test is preferred over a standard hypothesis test because the main goal is to determine whether the two groups-recipes with `n_steps` less than or equal to the median number of steps and recipes with `n_steps` greater than the median number of steps-look like they come from the same population. 
 
 There is reason to hypothesize that recipes with more steps are rated lower on average. This could be due to their complexity intimidating or frustrating users, leading to lower ratings, or because such recipes are prone to execution errors, resulting in unsatisfactory outcomes. To test this, the test statistic of the difference of means between the two groups was calculated. This is appropriate because the alternative hypothesis has a certain direction posits a specific direction: recipes with more steps tend to receive lower ratings.
+
+During this test, a column named `lower_median_steps` was created which consists of boolean values to help create the two groups. This column will be used in other sections of this report.
 
 To investigate this, the following was conducted:
 
@@ -315,8 +317,42 @@ State the features you added and why they are good for the data and prediction t
 
 Describe the modeling algorithm you chose, the hyperparameters that ended up performing the best, and the method you used to select hyperparameters and your overall model. Describe how your Final Model’s performance is an improvement over your Baseline Model’s performance.
 
+In the final model, I decided to focus on the following columns as features: `minutes`, `submitted`, `lower_median_steps`, `calories`, `protein`, and `tags_list`. Below, I will discuss the feature engineering applied and why each column is relevant for improving my baseline model. 
 
+`minutes`
 
+The `minutes` column was selected due to its observed relationship with the `avg_rating` column. Specifically, during the bivariate analysis, it was noticed that median ratings gradually decreased as minutes increased. This trend suggests that recipes with longer cooking time might receive lower ratings. With this, using the minutes column would be beneficial to predicting both lower and higher rating. In the baseline model this column was included and standardized using `StandardScalar`. To improve upon this, I applied a different yet similar transformer to `minutes`, `RobustScaler()`. This will normalize the variability of the `minutes` column while also mitigating the influence of the extreme outliers we noticed in the baseline model. This adjustiment should improve my model's performance as the relationship between minutes and ratings is an informative feature for predicting outcomes.
+
+`submitted`
+
+The `submitted` column was originally selected due to speculation that ratings might vary by the year or season in which a recipe was submitted. To look into this, analysis was done that concluded that more recent submissions tend to have lower average ratings. This could be due to newer recipes have receiving less attention or reviews. This infomatation is helpful to improving the model. So, I feature engineered the `submitted` column. A function was created to extract the year of each value. This was incorporated into the pipeline using a `FunctionTransformer`, followed by `OneHotEncoder` to represent the year as categorical data. I believe this will help improve my model's performace as there seems to be a trend between the year of the `submitted` column and the ratings of recipes.
+
+`lower_median_steps`
+
+The `lower_median_steps` column was created during the hypothesis test conducted earlier. This column was originially created to aid in the permutation test of exploring whether recipes with more steps tend to have lower ratings. The test concluded that there is sufficient evidence to support this hypothesis, as recipes with more steps are rated lower on average. This means that using the `lower_median_steps` column could further improve my model. A `OneHotEncoder` was used to categorize the column and treat each category equally. Incorporating this feature should improve the model’s ability to predict ratings by leveraging the relationship between `n_steps` and ratings.
+
+`calories` and `protein`
+
+The `calories` and `protein` columns were selected based on speculation that recipes with higher protein might receive higher ratings. This was further inspected through a scatter plot of `protein` against `avg_rating_rounded`. The plot confirmed my speculation as higher protein recipes tended to have better ratings. To balance potential confounding due to serving size, I calculated the proportion of protein relative to `calories` for each recipe. A function was created to calculate the protein proportions and was applied using `FunctionTransformer`. This new feature will add another layer of information and depth to my final model as there seems to be a relationship between protein levels and recipe ratings.
+
+`tags_list`
+
+The `tags_list` column was included due to speculation that recipes with more tags might receive higher ratings. Tags function like hashtags on this website, potentially increasing visibility and engagement with certain recipes. This was further investiagted using a bar plot that compared the number of tags with the average rating. My speculation was supported and the bar plot showed that recipes with longer tag lists tend to have slightly higher average ratings. To incorporate this, a function was created to extract the length of each list in `tags_list` and was used in my model's pipeline. I believe this information will help predict more accurate ratings, particularly on the higher end of the scale.
+
+As for the actual model, I continued to use a `RandomForestClassifier`. To optimize performance I applied `GridSearchCV` to perform cross-validation and hyperparameter tuning. The hyperparameters used were `max_depth` and `n_estimators`. The best parameters found were the following:
+
+- `max_depth`: 24
+- `n_estimators`: 350
+
+To evaluate my model, I continued to use the F1 score to best compare the improvement. The F1 score for the final model was **0.86**, which is a 0.19 increase from the baseline model. To further understand the F1 score for each category of rating, here are the individual scores: 
+
+- Rating 1: F1 score = 0.19
+- Rating 2: F1 score = 0.49
+- Rating 3: F1 score = 0.50
+- Rating 4: F1 score = 0.73
+- Rating 5: F1 score = 0.92
+
+Not only did the over all F1 score increase but each individual category also saw significant improvement. This can be further visualized the the Confusion Matrix below:
 
 <iframe
   src="assets/final-model-confusion-matrix.html"
@@ -324,6 +360,8 @@ Describe the modeling algorithm you chose, the hyperparameters that ended up per
   height="650"
   frameborder="0"
 ></iframe>
+
+In conclusion, the final model demonstres significant improvement over the baseline model due to the addition of feature engineering and optimization of hyperparameters. 
 
 ## Fairness Analysis
 
