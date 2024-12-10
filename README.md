@@ -315,12 +315,13 @@ State the features you added and why they are good for the data and prediction t
 
 Describe the modeling algorithm you chose, the hyperparameters that ended up performing the best, and the method you used to select hyperparameters and your overall model. Describe how your Final Model’s performance is an improvement over your Baseline Model’s performance.
 
-Optional: Include a visualization that describes your model’s performance, e.g. a confusion matrix, if applicable.
+
+
 
 <iframe
   src="assets/final-model-confusion-matrix.html"
-  width="620"
-  height="450"
+  width="820"
+  height="650"
   frameborder="0"
 ></iframe>
 
